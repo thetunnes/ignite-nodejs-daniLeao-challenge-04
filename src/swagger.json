@@ -1,0 +1,261 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Challenge Swagger - Ignite by Dani Leão",
+    "description": "Documentation API Challenge Ignite",
+    "contact": {
+      "name": "Tunnes",
+      "email": "tunnes@example.com"
+    },
+    "version": "1.0.1"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "List all users",
+        "description": "List all users when user is Admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User id to valid if user is Admin",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch users has with success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "id": "example UUIDv4 ",
+                      "name": "User name sample",
+                      "email": "user@example.com",
+                      "created_at": "2023-01-24T14:37:29.215Z",
+                      "updated_at": "2023-01-24T14:37:29.215Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User is not an Admin"
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "Create User",
+        "description": "Create a new User",
+        "requestBody": {
+          "description": "Infos of User to create a new User",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "User name sample",
+                  "email": "user@example.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created with success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "example UUIDv4 ",
+                    "name": "User name sample",
+                    "email": "user@example.com",
+                    "created_at": "2023-01-24T14:37:29.215Z",
+                    "updated_at": "2023-01-24T14:37:29.215Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User with email already exist."
+          }
+        }
+      }
+    },
+    "/users/:user_id": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Infos user logged",
+        "description": "Fetch all infos of user",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User Id of User logged",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User infos with success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "id": "example UUIDv4 ",
+                      "name": "User name sample",
+                      "email": "user@example.com",
+                      "admin": false,
+                      "created_at": "2023-01-24T14:37:29.215Z",
+                      "updated_at": "2023-01-24T14:37:29.215Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/:user_id/admin": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Turn permission Admin",
+        "description": "Change Turn permission Admin of User selected",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User Id of User logged",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change permission Admin for User with success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "admin": {
+                  "type": "boolean"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "id": "example UUIDv4 ",
+                "name": "User name sample",
+                "email": "user@example.com",
+                "admin": true,
+                "created_at": "2023-01-24T14:37:29.215Z",
+                "updated_at": "2023-01-24T14:37:29.215Z"
+              }
+            }
+          },
+          "404": {
+            "description": "User with Id not found"
+          }
+        }
+      }
+    }
+  }
+}
