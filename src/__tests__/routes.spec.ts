@@ -29,7 +29,7 @@ describe("[POST] /users", () => {
         email: "john.doe@example.com",
       })
       .expect(400);
-
+    console.log(response.body);
     expect(response.body.error).toBeTruthy();
   });
 });
